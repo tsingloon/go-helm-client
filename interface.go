@@ -2,6 +2,9 @@ package helmclient
 
 import (
 	"context"
+	"helm.sh/helm/v3/pkg/action"
+	"helm.sh/helm/v3/pkg/cli"
+	"helm.sh/helm/v3/pkg/getter"
 
 	"helm.sh/helm/v3/pkg/release"
 	"helm.sh/helm/v3/pkg/repo"
@@ -22,4 +25,10 @@ type Client interface {
 	UninstallReleaseByName(name string) error
 	TemplateChart(spec *ChartSpec) ([]byte, error)
 	LintChart(spec *ChartSpec) error
+
+	GetSetings() *cli.EnvSettings
+	GetProviders() getter.Providers
+	GetStorage() *repo.File
+	GetActionConfig() *action.Configuration
+	GetLinting() bool
 }
